@@ -135,15 +135,22 @@ export default {
     },
     findDeal() {
       // using .some because it doesn't continue iterating once it returns a true value
+      // This might need to be state. 
+      // using .some because it doesn't continue iterating once it returns a true value
       this.results.some((result, idx) => {
+        // This console log is checking to see if the .some method still runs after it finds a result
         console.log('This is running! ' + idx)
-        if(result.resultCombo.every((char, idx) => char === this.answerArray[idx]) ) {
-          console.log(`This is ${result.option}`)
-          return true
-        } else if(this.answerArray[0] === 'b' && this.answerArray[1] === 'b') {
-          console.log('This is option 5')
+        if(this.answerArr[0] === 'b' && this.answerArr[1] === 'b') {
+          this.option = this.results[4] 
+          return true // this is to stop the .some method
+        } else if(result.resultCombo.every((char, idx) => char === this.answerArr[idx]) ) {
+          this.option = result // set the result to state or some variable
+          return true // this is to stop the .some method
+        } else {
+          this.option = 'Something went wrong'
         }
       })
+      return this.option
       // results.some(result => {
       //   if (result.resultCombo.every(function(elem, idx) {
       //     elem === answerArr[idx]
