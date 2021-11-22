@@ -58,6 +58,7 @@ export default {
       selectedAnswer: '',
       answerArr: [],
       count: 4,
+      option: '',
       questions: [
         {
           question: "Do you see hair strands in the shower, around the house, everywhere you go?",
@@ -92,22 +93,27 @@ export default {
         {
           option: "Option 1",
           resultCombo: ['a','a','a','a'],
+          link: 'www.google.com'
         },
         {
           option: "Option 2",
           resultCombo: ['a','a','a','b'],
+          link: 'www.google.com'
         },
         {
           option: "Option 3",
           resultCombo: ['a','a','b','a'],
+          link: 'www.google.com'
         },
         {
           option: "Option 4",
           resultCombo: ['a','a','b','b'],
+          link: 'www.google.com'
         },
         {
           option: "Option 5",
-          resultCombo: null
+          resultCombo: null,
+          link: 'www.google.com'
         },
       ],
     }
@@ -128,6 +134,16 @@ export default {
         this.index++
     },
     findDeal() {
+      // using .some because it doesn't continue iterating once it returns a true value
+      this.results.some((result, idx) => {
+        console.log('This is running! ' + idx)
+        if(result.resultCombo.every((char, idx) => char === this.answerArray[idx]) ) {
+          console.log(`This is ${result.option}`)
+          return true
+        } else if(this.answerArray[0] === 'b' && this.answerArray[1] === 'b') {
+          console.log('This is option 5')
+        }
+      })
       // results.some(result => {
       //   if (result.resultCombo.every(function(elem, idx) {
       //     elem === answerArr[idx]
