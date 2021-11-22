@@ -123,7 +123,9 @@ export default {
       this.selectedAnswer = e.target.value
       this.answerArr.push(this.selectedAnswer)
       this.nextQuestion()
-      this.findDeal()
+      if (this.index === this.count) {
+        this.findDeal()
+      }
       console.log(this.answerArr)
     },
     nextQuestion() {
@@ -139,7 +141,7 @@ export default {
       // using .some because it doesn't continue iterating once it returns a true value
       this.results.some((result, idx) => {
         // This console log is checking to see if the .some method still runs after it finds a result
-        console.log('This is running! ' + idx)
+        console.log(result.resultCombo)
         if(this.answerArr[0] === 'b' && this.answerArr[1] === 'b') {
           this.option = this.results[4] 
           return true // this is to stop the .some method
